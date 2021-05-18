@@ -1,0 +1,20 @@
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @product.rating %>
+</p>
+<% if @product.image.attached? %>
+<%= image_tag @product.image, style: "width: 200px; display: block" %>
+<% end %>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
