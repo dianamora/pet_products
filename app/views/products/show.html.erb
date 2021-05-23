@@ -1,20 +1,28 @@
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @product.rating %>
-</p>
-<% if @product.image.attached? %>
-<%= image_tag @product.image, style: "width: 200px; display: block" %>
-<% end %>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<div class="panel panel-default">
+  <div class-"panel-body">
+    <div class="row">
+      <div class="col-md-4">
+      <%= image_tag @product.image, style: "width: 200px; display: block" %>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><strong>Title:</strong></td>
+              <td><%= @product.title %></td>
+            </tr>
+            <tr>
+              <td><strong>Description:</strong></td>
+              <td><%= @product.description %></td>
+            </tr>
+            <tr>
+              <td><strong>Rating:</strong></td>
+              <td><%= @product.rating %></td>
+            </tr>
+          </tbody>
+        </table>
+        <%= link_to "Write a Review", new_product_review_path(@product) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,28 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show] #we get this method from devise
+  
+  def search
+    if params[:search].present?
+      @products = Product.search(params[:search])
+    else
+      @products = Product.all
+    end
+  end
+
   def index
     @products = Product.all
   end
 
   def show
+    @reviews = Review.where(product_id: @product.id).order("created_at DESC")
+
+    if @reviews.blank?
+      @avg_review = 0
+    else
+      @avg_review = @reviews.average(:rating).round(2)
   end
+end
 
   def new
     @product = current_user.products.build
@@ -22,7 +38,7 @@ class ProductsController < ApplicationController
       if @product.save
         format.html { redirect_to @product, notice: "Product was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        render 'new'
       end
     end
   end
@@ -40,7 +56,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to products_url, notice: "Product was successfully deleted." }
     end
   end
 
