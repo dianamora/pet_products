@@ -7,13 +7,16 @@
         <table class="table">
           <tbody>
             <tr>
-              <td><strong>Title:</strong>   <%= @product.title %></td>
+              <td><h4>Title:   <%= @product.title %></h4></td>
             </tr>
             <tr>
               <td><strong>Description:</strong>   <%= @product.description %></td>
             </tr>
             <tr>
               <td><strong>Rating:</strong>    <%= @product.rating %></td>
+            </tr> 
+            <tr>
+              <td><strong>From:</strong>    <%= @product.user.email %></td>
             </tr> 
           </tbody>
         </table>
@@ -25,8 +28,8 @@
       <div class="col-md-7 col-md-offset-1">
         
         <% if @reviews.blank? %>
-          <h3 class="no-reviews-msg">No reviews yet, would you like to add one?</h3>
-          <%= link_to "Write Review", new_product_review_path(@product), class: "btn btn-danger" %>
+          <h4 class="no-reviews-msg">No comments yet, would you like to add one?</h4>
+          <%= link_to "Leave Comment", new_product_review_path(@product), class: "btn btn-danger" %>
         <% else %>
           <% @reviews.each do |review| %>
           <div class="reviews">
