@@ -4,8 +4,6 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
 
-
-
   def new
     @review = Review.new
   end
@@ -30,7 +28,8 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-      redirect_to root_path
+    redirect_to @product
+      
   end
 
   private
