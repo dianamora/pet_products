@@ -23,6 +23,25 @@
         <%= link_to "Write a Review", new_product_review_path(@product) %>
         </div>
       </div>
+      <div class="col-md-7 col-md-offset-1">
+        <h1 class="review_title"><%= @product.title %></h1>
+        <p><%= @product.description %></p>
+
+        <% if @reviews.blank? %>
+        <h3>No reviews, would you like to add one?</h3>
+        <%= link_to "Write Review", new_product_review_path(@product), class: "btn btn-danger" %>
+        <% else %>
+        <% @reviews.each do |review| %>
+          <div class="reviews">
+            <p><%= review.rating %></p>
+            <p><%= review.comment %></p>
+          </div>
+        <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
+
+<%= link_to "Edit", edit_product_path(@product) %> |
+<%= link_to "Back", products_path %>
